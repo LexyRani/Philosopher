@@ -7,9 +7,8 @@ NAME = philo
 #******************************************************************************#
 
 SRCS += Sources/Parsing/main.c
-
-
 SRCS += Sources/Parsing/init.c
+SRCS += Sources/Parsing/routine.c
 
 
 #******************************************************************************#
@@ -20,7 +19,7 @@ SRCS += Sources/Parsing/init.c
 #******************************************************************************#
 #*									UTILS	  								  *#
 #******************************************************************************#
-SRCS += Sources/Utils/Utils.c
+SRCS += Sources/Utils/utils.c
 
 OBJS = $(SRCS:.c=.o)
 
@@ -48,9 +47,9 @@ BACK_WHITE  = \033[0;47;30m
 all:  $(NAME) header
 
 $(NAME): $(OBJS) $(HEADER)
-		${CC} ${CFLAGS} ${SRCS} -I $(HEADER) -o ${NAME}
+		${CC} ${CFLAGS} ${SRCS} -I$(HEADER) -o ${NAME}
 %.o: %.c $(HEADER)
-	$(CC) $(CFLAGS) -o $@ -c $< 
+	$(CC) $(CFLAGS) -I$(HEADER) -o $@ -c $< 
 
 clean:
 		rm -f $(OBJS)

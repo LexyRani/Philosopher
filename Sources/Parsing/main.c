@@ -6,20 +6,23 @@
 /*   By: aceralin <aceralin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 23:13:01 by aceralin          #+#    #+#             */
-/*   Updated: 2023/03/14 18:49:48 by aceralin         ###   ########.fr       */
+/*   Updated: 2023/03/14 20:01:28 by aceralin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../Include/philosopher.h"
+#include "philosopher.h"
 
-void   * routine(void *p)
+void   *ft_thread(void *p)
 {
 	t_philo	*philo;
 
 	philo = (t_philo *)p;
-	pthread_mutex_lock(&philo->data->mutex_philo);
-	printf("Je suis %d\n", philo->index);
-	pthread_mutex_unlock(&philo->data->mutex_philo);
+	// pthread_mutex_lock(&philo->data->mutex_philo);
+	// printf("Je suis %d\n", philo->index);
+	// pthread_mutex_unlock(&philo->data->mutex_philo);
+	if (philo->index % 2)
+		usleep(10000); //10.000 microsecondes = 10 millisecondes
+	routine(philo);
 	return (NULL);
 }
 
@@ -59,7 +62,7 @@ int	main(int argc, char **argv)
 	// initialiser les threads
 	while (i < data.nb_philo)
 	{
-		if (pthread_create(&philo[i].id, NULL, &routine, &philo[i]) != 0)
+		if (pthread_create(&philo[i].id, NULL, &ft_thread, &philo[i]) != 0)
 		{
 			printf("Error thread\n");
 			break ;
@@ -74,3 +77,4 @@ int	main(int argc, char **argv)
 	}
 	return (0);
 }
+//valgrind --tool=helgrind permet de voir les data race

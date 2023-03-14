@@ -6,7 +6,7 @@
 /*   By: aceralin <aceralin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 23:12:51 by aceralin          #+#    #+#             */
-/*   Updated: 2023/03/14 18:11:04 by aceralin         ###   ########.fr       */
+/*   Updated: 2023/03/14 19:59:00 by aceralin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <pthread.h>
-
+# include <unistd.h>
+# include <sys/time.h>
 
 typedef struct s_forks
 {
@@ -35,19 +36,18 @@ typedef struct s_data
 
 typedef struct s_philo
 {
-	int	index;
-	pthread_t id;
-	//int nb_philo;
-	int time_to_die;
-	int time_to_eat;
-	int time_to_sleep;
-	int times_must_eat;
-	t_forks *right_fork;
-	t_forks *left_fork;
-	t_data *data;
-	
-	//nombre de fourchette
-}   t_philo;
+	int			index;
+	pthread_t 	id;
+	int 		time_to_die;
+	int 		time_to_eat;
+	int 		time_to_sleep;
+	int 		times_must_eat;
+	int			last_meal_time;
+	long int	start_time;
+	t_forks 	*right_fork;
+	t_forks 	*left_fork;
+	t_data 		*data;
+}   			t_philo;
 
 /*-----------Parsing-------------*/
 int	check_arg(int argc, char **argv);
@@ -56,6 +56,10 @@ int	check_arg(int argc, char **argv);
 void	init_all(t_philo *philo, char **argv, t_data *data);
 
 /*-----------Utils--------------*/
-long	ft_atoi(char *str);
+long		ft_atoi(char *str);
+long int	get_time(long int start_time);
+
+/*----------Routine--------------*/
+void    routine(t_philo *philo);
 
 #endif

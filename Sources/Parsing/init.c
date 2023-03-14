@@ -6,17 +6,21 @@
 /*   By: aceralin <aceralin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 17:57:20 by aceralin          #+#    #+#             */
-/*   Updated: 2023/03/14 18:50:03 by aceralin         ###   ########.fr       */
+/*   Updated: 2023/03/14 19:59:38 by aceralin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../Include/philosopher.h"
+#include "philosopher.h"
 
 void	init_philo(t_philo	*philo, char **argv, t_data *data)
 {
-	int	i;
+	struct timeval	current_time;
+	long int		start_time;
+	int				i;
 
 	i = 0;
+	gettimeofday(&current_time, NULL); //proteger
+	start_time = current_time.tv_sec * 1000 + current_time.tv_usec / 1000;
 	data->nb_philo = ft_atoi(argv[1]); //nombre de philo
 	while(i < data->nb_philo)
 	{
@@ -30,6 +34,7 @@ void	init_philo(t_philo	*philo, char **argv, t_data *data)
 		philo[i].left_fork = &data->forks[i];
 		philo[i].right_fork = &data->forks[(i + 1) % data->nb_philo];
 		philo[i].data = data;
+		philo[i].start_time = start_time;
 		// printf("left: %d, right: %d\n", i, (i + 1) % data->nb_philo);
 		i++;
 	}
@@ -50,8 +55,9 @@ void	init_fork(t_data *data)
 
 void	init_data(t_data *data)
 {
+
 	pthread_mutex_init(&data->mutex_philo, NULL); //proteger
-	data->someone_died = 0; 
+	data->someone_died = 0;
 }
 
 void	init_all(t_philo *philo, char **argv, t_data *data)
