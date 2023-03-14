@@ -6,16 +6,22 @@
 /*   By: aceralin <aceralin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 23:13:01 by aceralin          #+#    #+#             */
-/*   Updated: 2023/03/14 18:25:39 by aceralin         ###   ########.fr       */
+/*   Updated: 2023/03/14 18:49:48 by aceralin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../Include/philosopher.h"
 
-// void    routine(void *data)
-// {
+void   * routine(void *p)
+{
+	t_philo	*philo;
 
-// }
+	philo = (t_philo *)p;
+	pthread_mutex_lock(&philo->data->mutex_philo);
+	printf("Je suis %d\n", philo->index);
+	pthread_mutex_unlock(&philo->data->mutex_philo);
+	return (NULL);
+}
 
 int	check_arg(int argc, char **argv)
 {
@@ -37,7 +43,9 @@ int	main(int argc, char **argv)
 {
 	t_philo *philo;
 	t_data	data;
+	int		i;
 
+	i = 0;
 	if (!check_arg(argc, argv))
 		return (printf("Error\n"), 1);
 	philo = malloc(sizeof (t_philo) * ft_atoi(argv[1]));
@@ -48,8 +56,21 @@ int	main(int argc, char **argv)
 		return(printf("Error: Malloc fork fail"), free(philo), 1);
 	init_all(philo, argv, &data);
 	printf("%d, %d, %d, %d, %d \n", data.nb_philo, philo->time_to_die, philo->time_to_eat, philo->time_to_sleep, philo->times_must_eat);
-	//initialiser les philo
-
-	// if(pthread_create(philo->id, NULL, &routine, philo) != 0)
+	// initialiser les threads
+	while (i < data.nb_philo)
+	{
+		if (pthread_create(&philo[i].id, NULL, &routine, &philo[i]) != 0)
+		{
+			printf("Error thread\n");
+			break ;
+		}
+		i++;
+	}
+	
+	while (i)
+	{
+		i--;
+		pthread_join(philo[i].id, NULL);
+	}
 	return (0);
 }
