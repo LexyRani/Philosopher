@@ -1,4 +1,4 @@
-NAME = so_long
+NAME = philo
 
 #--Source--s
 
@@ -9,6 +9,8 @@ NAME = so_long
 SRCS += Sources/Parsing/main.c
 
 
+SRCS += Sources/Parsing/init.c
+
 
 #******************************************************************************#
 #*									ERRORS  								  *#
@@ -18,18 +20,18 @@ SRCS += Sources/Parsing/main.c
 #******************************************************************************#
 #*									UTILS	  								  *#
 #******************************************************************************#
-
+SRCS += Sources/Utils/Utils.c
 
 OBJS = $(SRCS:.c=.o)
 
-HEADER += Includes/
+HEADER += Include/
 
 
 #******************************************************************************/
 #*									COMPILATEURS	  						  */
 #******************************************************************************/
 CC = cc
-CFLAGS = -Wall -Wextra -Werror #-g3 #-fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -pthread -g3 #-fsanitize=address
 
 
 #******************************************************************************/
@@ -46,18 +48,15 @@ BACK_WHITE  = \033[0;47;30m
 all:  $(NAME) header
 
 $(NAME): $(OBJS) $(HEADER)
-		$(MAKE) -C $(MLX_DIR)
-		${CC} ${CFLAGS} ${SRCS} -I  -o ${NAME} 
+		${CC} ${CFLAGS} ${SRCS} -I $(HEADER) -o ${NAME}
 %.o: %.c $(HEADER)
-	$(CC) $(CFLAGS) -I $(MLX_DIR) -o $@ -c $< 
+	$(CC) $(CFLAGS) -o $@ -c $< 
 
 clean:
 		rm -f $(OBJS)
-		$(MAKE) clean -C $(MLX_DIR)
 
 fclean: clean
 		rm -f $(NAME)
-			
 
 re: fclean all
 
