@@ -6,7 +6,7 @@
 /*   By: aceralin <aceralin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 23:13:01 by aceralin          #+#    #+#             */
-/*   Updated: 2023/03/14 20:01:28 by aceralin         ###   ########.fr       */
+/*   Updated: 2023/03/14 20:26:05 by aceralin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,12 @@ void   *ft_thread(void *p)
 	// pthread_mutex_lock(&philo->data->mutex_philo);
 	// printf("Je suis %d\n", philo->index);
 	// pthread_mutex_unlock(&philo->data->mutex_philo);
+	philo->last_meal_time = get_time(philo->start_time);
 	if (philo->index % 2)
 		usleep(10000); //10.000 microsecondes = 10 millisecondes
-	routine(philo);
+	while (!philo->dead && philo->times_must_eat)
+		routine(philo);
+	printf("%ld %d finished eating\n", get_time(philo->start_time), philo->index);
 	return (NULL);
 }
 
@@ -69,7 +72,6 @@ int	main(int argc, char **argv)
 		}
 		i++;
 	}
-	
 	while (i)
 	{
 		i--;

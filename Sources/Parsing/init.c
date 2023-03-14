@@ -6,7 +6,7 @@
 /*   By: aceralin <aceralin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 17:57:20 by aceralin          #+#    #+#             */
-/*   Updated: 2023/03/14 19:59:38 by aceralin         ###   ########.fr       */
+/*   Updated: 2023/03/14 20:11:03 by aceralin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	init_philo(t_philo	*philo, char **argv, t_data *data)
 		philo[i].right_fork = &data->forks[(i + 1) % data->nb_philo];
 		philo[i].data = data;
 		philo[i].start_time = start_time;
+		philo[i].dead = 0;
 		// printf("left: %d, right: %d\n", i, (i + 1) % data->nb_philo);
 		i++;
 	}
@@ -55,7 +56,6 @@ void	init_fork(t_data *data)
 
 void	init_data(t_data *data)
 {
-
 	pthread_mutex_init(&data->mutex_philo, NULL); //proteger
 	data->someone_died = 0;
 }

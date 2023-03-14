@@ -6,7 +6,7 @@
 /*   By: aceralin <aceralin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 23:12:51 by aceralin          #+#    #+#             */
-/*   Updated: 2023/03/14 19:59:00 by aceralin         ###   ########.fr       */
+/*   Updated: 2023/03/14 20:10:07 by aceralin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct s_philo
 	int 		time_to_sleep;
 	int 		times_must_eat;
 	int			last_meal_time;
+	int			dead;
 	long int	start_time;
 	t_forks 	*right_fork;
 	t_forks 	*left_fork;
