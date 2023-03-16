@@ -6,7 +6,7 @@
 /*   By: aceralin <aceralin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 23:13:01 by aceralin          #+#    #+#             */
-/*   Updated: 2023/03/16 16:18:29 by aceralin         ###   ########.fr       */
+/*   Updated: 2023/03/16 19:17:08 by aceralin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	*ft_thread(void *p)
 		usleep(10000); //10.000 microsecondes = 10 millisecondes
 	while (!philo->dead && philo->times_must_eat)
 		routine(philo);
-	printf("%ld %d finished eating\n", get_time(philo->start_time), philo->index);
+	// printf("%ld %d finished eating\n", get_time(philo->start_time), philo->index);
 	return (NULL);
 }
 
