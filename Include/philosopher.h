@@ -6,7 +6,7 @@
 /*   By: aceralin <aceralin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 23:12:51 by aceralin          #+#    #+#             */
-/*   Updated: 2023/03/14 20:10:07 by aceralin         ###   ########.fr       */
+/*   Updated: 2023/03/16 18:48:17 by aceralin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,13 @@
 # include <pthread.h>
 # include <unistd.h>
 # include <sys/time.h>
+
+# define EAT "is eating"
+# define SLEEP "is sleeping"
+# define DIE "died"
+# define THINK "is thinking"
+# define TAKE_FORK "has taken a fork"
+
 
 typedef struct s_forks
 {
@@ -37,6 +44,7 @@ typedef struct s_data
 typedef struct s_philo
 {
 	int			index;
+	int			take_forks;
 	pthread_t 	id;
 	int 		time_to_die;
 	int 		time_to_eat;

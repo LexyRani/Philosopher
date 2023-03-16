@@ -6,7 +6,7 @@
 /*   By: aceralin <aceralin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 17:57:20 by aceralin          #+#    #+#             */
-/*   Updated: 2023/03/14 20:11:03 by aceralin         ###   ########.fr       */
+/*   Updated: 2023/03/16 18:45:26 by aceralin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,15 @@ void	init_philo(t_philo	*philo, char **argv, t_data *data)
 	gettimeofday(&current_time, NULL); //proteger
 	start_time = current_time.tv_sec * 1000 + current_time.tv_usec / 1000;
 	data->nb_philo = ft_atoi(argv[1]); //nombre de philo
-	while(i < data->nb_philo)
+	while (i < data->nb_philo)
 	{
 		philo[i].index = i + 1;
+		philo[i].take_forks = 0;
 		philo[i].time_to_die = ft_atoi(argv[2]); //
 		philo[i].time_to_eat = ft_atoi(argv[3]); // temps que le philo passe à manger
 		philo[i].time_to_sleep = ft_atoi(argv[4]);// temps que le philo passe à dormir
 		philo[i].times_must_eat = -1;
-		if(argv[5])
+		if (argv[5])
 			philo[i].times_must_eat = ft_atoi(argv[5]);//nombre de fois que chaque philo doit manger
 		philo[i].left_fork = &data->forks[i];
 		philo[i].right_fork = &data->forks[(i + 1) % data->nb_philo];
