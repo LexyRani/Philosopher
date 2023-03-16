@@ -6,7 +6,7 @@
 /*   By: aceralin <aceralin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 19:01:35 by aceralin          #+#    #+#             */
-/*   Updated: 2023/03/16 19:29:34 by aceralin         ###   ########.fr       */
+/*   Updated: 2023/03/16 19:58:24 by aceralin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,12 @@ void	take_a_fork(t_philo *philo)
 	}
 }
 
-void	eating(t_philo *philo)
+void	is_eating(t_philo *philo)
 {
 	long int	end_time;
 
 	print_routine(philo, EAT);
+	philo->last_meal_time = get_time(philo->start_time);
 	end_time = get_time(philo->start_time) + philo->time_to_eat;
 	while (get_time(philo->start_time) < end_time && philo->dead != 1)
 	{
@@ -74,10 +75,9 @@ void	eating(t_philo *philo)
 void	routine(t_philo *philo)
 {
 	take_a_fork(philo);//il doit prendre deux fourchettes pour manger
-	eating(philo);
-	//puis il mange
-	//il libere les fourchettes
-	//il dort
+	is_eating(philo);//puis il mange
+	free_forks(philo);//il libere les fourchettes
+	is_sleeping(philo);//il dort
 	//il pense au reveil
 	// print_routine(philo, EAT);
 	// print_routine(philo, EAT);

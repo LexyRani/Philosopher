@@ -6,7 +6,7 @@
 /*   By: aceralin <aceralin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 23:12:51 by aceralin          #+#    #+#             */
-/*   Updated: 2023/03/16 18:48:17 by aceralin         ###   ########.fr       */
+/*   Updated: 2023/03/16 19:51:11 by aceralin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,11 @@ void	init_all(t_philo *philo, char **argv, t_data *data);
 /*-----------Utils--------------*/
 long		ft_atoi(char *str);
 long int	get_time(long int start_time);
+void	print_routine(t_philo *philo, char *action);
+void	is_sleeping(t_philo *philo);
 
 /*----------Routine--------------*/
 void    routine(t_philo *philo);
-
+void	free_forks(t_philo *philo);
+void	check_death(t_philo *philo);
 #endif

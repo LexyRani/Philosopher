@@ -9,7 +9,7 @@ NAME = philo
 SRCS += Sources/Parsing/main.c
 SRCS += Sources/Parsing/init.c
 SRCS += Sources/Parsing/routine.c
-
+SRCS += Sources/Parsing/routine2.c
 
 #******************************************************************************#
 #*									ERRORS  								  *#
