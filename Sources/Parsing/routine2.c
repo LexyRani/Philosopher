@@ -6,7 +6,7 @@
 /*   By: aceralin <aceralin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 19:32:37 by aceralin          #+#    #+#             */
-/*   Updated: 2023/03/16 20:02:02 by aceralin         ###   ########.fr       */
+/*   Updated: 2023/03/16 20:48:15 by aceralin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,14 @@ void	free_forks(t_philo *philo)
 	philo->take_forks = 0;
 }
 
+long long	get_time_now(void)
+{
+	struct timeval	tv;
+
+	gettimeofday(&tv, NULL);
+	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
+}
+
 void	is_sleeping(t_philo *philo)
 {
 	long int	end_time;
@@ -31,7 +39,11 @@ void	is_sleeping(t_philo *philo)
 	end_time = get_time(philo->start_time) + philo->time_to_sleep;
 	while (get_time(philo->start_time) < end_time && philo->dead != 1)
 	{
+		pthread_mutex_lock(&philo->data->mutex_philo);
 		check_death(philo);
+		pthread_mutex_unlock(&philo->data->mutex_philo);
+		if (philo->dead)
+			break ;
 		usleep(100);
 	}
 	print_routine(philo, THINK);

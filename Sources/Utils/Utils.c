@@ -6,7 +6,7 @@
 /*   By: aceralin <aceralin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 23:12:55 by aceralin          #+#    #+#             */
-/*   Updated: 2023/03/14 20:01:57 by aceralin         ###   ########.fr       */
+/*   Updated: 2023/03/16 20:21:18 by aceralin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,11 @@
 
 long int	get_time(long int start_time)
 {
-	struct timeval current_time;
-	
+	struct timeval	current_time;
+
 	gettimeofday(&current_time, NULL);
-	return(current_time.tv_sec * 1000 + current_time.tv_usec / 1000 - start_time);
+	return (current_time.tv_sec * 1000 + current_time.tv_usec \
+	/ 1000 - start_time);
 }
 
 long	ft_atoi(char *str)

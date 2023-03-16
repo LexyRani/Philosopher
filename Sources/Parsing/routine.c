@@ -6,7 +6,7 @@
 /*   By: aceralin <aceralin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 19:01:35 by aceralin          #+#    #+#             */
-/*   Updated: 2023/03/16 19:58:24 by aceralin         ###   ########.fr       */
+/*   Updated: 2023/03/16 20:50:26 by aceralin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void	take_a_fork(t_philo *philo)
 			print_routine(philo, TAKE_FORK);
 		}
 		pthread_mutex_unlock(&philo->left_fork->mutex_fork);
+		usleep(1);
 		pthread_mutex_lock(&philo->data->mutex_philo);
 		check_death(philo);
 		pthread_mutex_unlock(&philo->data->mutex_philo);
@@ -67,7 +68,11 @@ void	is_eating(t_philo *philo)
 	end_time = get_time(philo->start_time) + philo->time_to_eat;
 	while (get_time(philo->start_time) < end_time && philo->dead != 1)
 	{
+		pthread_mutex_lock(&philo->data->mutex_philo);
 		check_death(philo);
+		pthread_mutex_unlock(&philo->data->mutex_philo);
+		if (philo->dead)
+			break ;
 		usleep(100);
 	}
 }
@@ -75,12 +80,10 @@ void	is_eating(t_philo *philo)
 void	routine(t_philo *philo)
 {
 	take_a_fork(philo);//il doit prendre deux fourchettes pour manger
-	is_eating(philo);//puis il mange
+	if (philo->times_must_eat)
+		is_eating(philo);//puis il mange
 	free_forks(philo);//il libere les fourchettes
-	is_sleeping(philo);//il dort
-	//il pense au reveil
-	// print_routine(philo, EAT);
-	// print_routine(philo, EAT);
-	// print_routine(philo, EAT);
-	// print_routine(philo, EAT);
+	philo->times_must_eat--;
+	if (philo->times_must_eat)
+		is_sleeping(philo);//il dort
 }
