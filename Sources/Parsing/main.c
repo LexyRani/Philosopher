@@ -6,7 +6,7 @@
 /*   By: aceralin <aceralin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 23:13:01 by aceralin          #+#    #+#             */
-/*   Updated: 2023/03/16 20:59:13 by aceralin         ###   ########.fr       */
+/*   Updated: 2023/03/16 21:06:51 by aceralin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	*ft_thread(void *p)
 		usleep(10000); //10.000 microsecondes = 10 millisecondes
 	while (!philo->dead && philo->times_must_eat)
 		routine(philo);
-	// printf("%ld %d finished eating\n", get_time(philo->start_time), philo->index);
 	return (NULL);
 }
 
@@ -51,7 +50,7 @@ int	main(int argc, char **argv)
 	i = 0;
 	if (!check_arg(argc, argv))
 		return (printf("Error\n"), 1);
-	
+
 	philo = malloc(sizeof (t_philo) * ft_atoi(argv[1]));
 	if (!philo)
 		return (printf("Error: Malloc philo fail"), 1);
@@ -59,7 +58,7 @@ int	main(int argc, char **argv)
 	if (!data.forks)
 		return (printf("Error: Malloc fork fail"), free(philo), 1);
 	init_all(philo, argv, &data);
-	printf("%d, %d, %d, %d, %d \n", data.nb_philo, philo->time_to_die, philo->time_to_eat, philo->time_to_sleep, philo->times_must_eat);
+	// printf("%d, %d, %d, %d, %d \n", data.nb_philo, philo->time_to_die, philo->time_to_eat, philo->time_to_sleep, philo->times_must_eat);
 	// initialiser les threads
 	while (i < data.nb_philo)
 	{
