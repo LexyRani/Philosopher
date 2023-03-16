@@ -6,7 +6,7 @@
 /*   By: aceralin <aceralin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 19:01:35 by aceralin          #+#    #+#             */
-/*   Updated: 2023/03/16 19:15:50 by aceralin         ###   ########.fr       */
+/*   Updated: 2023/03/16 19:29:34 by aceralin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	print_routine(t_philo *philo, char *action)
 
 void	take_a_fork(t_philo *philo)
 {
-	while (philo->take_forks != 2)
+	while (philo->take_forks != 2 && philo->dead != 1)
 	{
 		pthread_mutex_lock(&philo->left_fork->mutex_fork);
 		if (philo->left_fork->free_fork == 0)
@@ -44,6 +44,9 @@ void	take_a_fork(t_philo *philo)
 			print_routine(philo, TAKE_FORK);
 		}
 		pthread_mutex_unlock(&philo->left_fork->mutex_fork);
+		pthread_mutex_lock(&philo->data->mutex_philo);
+		check_death(philo);
+		pthread_mutex_unlock(&philo->data->mutex_philo);
 		pthread_mutex_lock(&philo->right_fork->mutex_fork);
 		if (philo->right_fork->free_fork == 0)
 		{
@@ -51,7 +54,7 @@ void	take_a_fork(t_philo *philo)
 			philo->take_forks++;
 			print_routine(philo, TAKE_FORK);
 		}
-		pthread_mutex_unlock(&philo->left_fork->mutex_fork);
+		pthread_mutex_unlock(&philo->right_fork->mutex_fork);
 	}
 }
 
