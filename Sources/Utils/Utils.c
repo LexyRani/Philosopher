@@ -6,13 +6,11 @@
 /*   By: aceralin <aceralin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 23:12:55 by aceralin          #+#    #+#             */
-/*   Updated: 2023/03/16 20:21:18 by aceralin         ###   ########.fr       */
+/*   Updated: 2023/03/19 19:34:22 by aceralin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../Include/philosopher.h"
-
-// void	print_routiun
+#include "philosopher.h"
 
 long int	get_time(long int start_time)
 {
