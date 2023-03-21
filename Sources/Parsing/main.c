@@ -6,7 +6,7 @@
 /*   By: aceralin <aceralin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 23:13:01 by aceralin          #+#    #+#             */
-/*   Updated: 2023/03/19 19:32:04 by aceralin         ###   ########.fr       */
+/*   Updated: 2023/03/21 22:50:43 by aceralin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,16 @@ void	*ft_thread(void *p)
 	return (NULL);
 }
 
+int	ft_strlen(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str && str[i])
+		i++;
+	return (i);
+}
+
 int	check_arg(int argc, char **argv)
 {
 	int	i;
@@ -34,6 +44,8 @@ int	check_arg(int argc, char **argv)
 	i = 1;
 	while (argv[i])
 	{
+		if (ft_strlen(argv[i]) > 11)
+			return (0);
 		if (ft_atoi(argv[i]) == 0 || ft_atoi(argv[i]) > INT_MAX)
 			return (0);
 		i++;
@@ -61,6 +73,3 @@ int	main(int argc, char **argv)
 	free(data.forks);
 	return (0);
 }
-
-//valgrind --tool=helgrind permet de voir les data race
-//(ulimit -v 120000; valgrind --leak-check=full --show-leak-kinds=all ./philo 6 405 200 200 10)
