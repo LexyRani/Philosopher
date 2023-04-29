@@ -6,7 +6,7 @@
 /*   By: aceralin <aceralin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 23:13:01 by aceralin          #+#    #+#             */
-/*   Updated: 2023/03/21 22:50:43 by aceralin         ###   ########.fr       */
+/*   Updated: 2023/04/29 18:42:26 by aceralin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,33 @@ int	ft_strlen(char *str)
 	return (i);
 }
 
+int	zero_before_number(char *str)
+{
+	int	len;
+	int	i;
+
+	len = 0;
+	i = 0;
+	if (!str)
+		return (0);
+	if (str[i])
+	{
+		if (str[i] == '-' || str[i] == '+')
+			i++;
+		while (str[i] == '0')
+			i++;
+	}
+	while (str[i])
+	{
+		len++;
+		i++;
+	}
+	if (len > 11)
+		return (1);
+	else
+		return (0);
+}
+
 int	check_arg(int argc, char **argv)
 {
 	int	i;
@@ -44,7 +71,7 @@ int	check_arg(int argc, char **argv)
 	i = 1;
 	while (argv[i])
 	{
-		if (ft_strlen(argv[i]) > 11)
+		if (ft_strlen(argv[i]) > 11 && zero_before_number(argv[i]))
 			return (0);
 		if (ft_atoi(argv[i]) == 0 || ft_atoi(argv[i]) > INT_MAX)
 			return (0);
