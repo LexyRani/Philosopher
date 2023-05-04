@@ -6,7 +6,7 @@
 /*   By: aceralin <aceralin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 19:32:37 by aceralin          #+#    #+#             */
-/*   Updated: 2023/03/21 22:49:16 by aceralin         ###   ########.fr       */
+/*   Updated: 2023/05/04 18:14:36 by aceralin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	is_sleeping(t_philo *philo)
 		pthread_mutex_unlock(&philo->data->mutex_philo);
 		if (philo->dead)
 			break ;
-		usleep(100);
+		usleep(50);
 	}
 	print_routine(philo, THINK);
 }

@@ -6,7 +6,7 @@
 /*   By: aceralin <aceralin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 23:12:55 by aceralin          #+#    #+#             */
-/*   Updated: 2023/04/29 20:17:35 by aceralin         ###   ########.fr       */
+/*   Updated: 2023/05/04 14:40:38 by aceralin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ long	ft_atoi(char *str)
 	nb = 0;
 	if (!str)
 		return (0);
-	if (str[i] == '+')/**/
+	if (str[i] == '+')
 		i++;
 	while (str[i])
 	{

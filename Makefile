@@ -30,7 +30,7 @@ HEADER += Include/
 #*									COMPILATEURS	  						  */
 #******************************************************************************/
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -pthread -g3 #-fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -pthread -g3  #-fsanitize=thread #-fsanitize=address  
 
 
 #******************************************************************************/

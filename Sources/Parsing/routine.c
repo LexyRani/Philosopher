@@ -6,7 +6,7 @@
 /*   By: aceralin <aceralin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 19:01:35 by aceralin          #+#    #+#             */
-/*   Updated: 2023/04/29 18:44:13 by aceralin         ###   ########.fr       */
+/*   Updated: 2023/05/04 19:27:59 by aceralin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,16 +73,12 @@ void	is_eating(t_philo *philo)
 		pthread_mutex_unlock(&philo->data->mutex_philo);
 		if (philo->dead)
 			break ;
-		usleep(100);
+		usleep(50);
 	}
 }
 
 void	routine(t_philo *philo)
 {
-	//pthread_mutex_lock(&philo->data->mutex_philo);
-	//pthread_mutex_unlock(&philo->data->mutex_philo);
-	//lock le mutex
-	//delock le mutex
 	take_a_fork(philo);
 	if (philo->times_must_eat)
 		is_eating(philo);
@@ -90,4 +86,6 @@ void	routine(t_philo *philo)
 	philo->times_must_eat--;
 	if (philo->times_must_eat)
 		is_sleeping(philo);
+	else
+		print_routine(philo, SLEEP);
 }

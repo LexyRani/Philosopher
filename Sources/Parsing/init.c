@@ -6,7 +6,7 @@
 /*   By: aceralin <aceralin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 17:57:20 by aceralin          #+#    #+#             */
-/*   Updated: 2023/04/29 18:44:04 by aceralin         ###   ########.fr       */
+/*   Updated: 2023/05/04 14:40:24 by aceralin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,6 @@ void	init_thread(t_philo *philo, t_data *data)
 	int	i;
 
 	i = 0;
-	//pthread_mutex_lock(&data->mutex_philo);
 	while (i < data->nb_philo)
 	{
 		if (pthread_create(&philo[i].id, NULL, &ft_thread, &philo[i]) != 0)
@@ -107,9 +106,6 @@ void	init_thread(t_philo *philo, t_data *data)
 		}
 		i++;
 	}
-	//get_time(philo->start_time);
-	//set ton temps de depart
-	//pthread_mutex_unlock(&data->mutex_philo);
 	while (i--)
 		pthread_join(philo[i].id, NULL);
 }
