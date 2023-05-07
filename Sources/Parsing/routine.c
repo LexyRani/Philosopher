@@ -6,7 +6,7 @@
 /*   By: aceralin <aceralin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 19:01:35 by aceralin          #+#    #+#             */
-/*   Updated: 2023/05/04 19:27:59 by aceralin         ###   ########.fr       */
+/*   Updated: 2023/05/07 15:22:42 by aceralin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ void	take_a_fork(t_philo *philo)
 			print_routine(philo, TAKE_FORK);
 		}
 		pthread_mutex_unlock(&philo->left_fork->mutex_fork);
-		usleep(1);
 		pthread_mutex_lock(&philo->data->mutex_philo);
 		check_death(philo);
 		pthread_mutex_unlock(&philo->data->mutex_philo);

@@ -6,7 +6,7 @@
 /*   By: aceralin <aceralin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 23:13:01 by aceralin          #+#    #+#             */
-/*   Updated: 2023/05/04 17:49:56 by aceralin         ###   ########.fr       */
+/*   Updated: 2023/05/07 13:38:29 by aceralin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	*ft_thread(void *p)
 	philo = (t_philo *)p;
 	philo->last_meal_time = get_time(philo->start_time);
 	if ((philo->index % 2) == 0)
-		usleep(10000);
+		usleep(50000);
 	while (!philo->dead && philo->times_must_eat)
 		routine(philo);
 	return (NULL);
